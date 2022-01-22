@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+    console.log('it works')
+    var state = {
+      left: false,
+      right: false,
+      up: false,
+      down: false
+    }
+    var update = function(){
+      $.ajax({
+        type: "POST",
+        url: 'update',
+        data: JSON.stringify(state),
+        success: function(){console.log("chupala juan")},
+        contentType: "application/json"
+      });
+    }
+    $(document).on("keydown", function (event) {
+      switch(event.which){
+        case 37: {
+          if(state.left){
+            break;
+          }
+          state.left = true;
+          update();
+          break
+        }
+        case 38: {
+          if(state.up){
+            break;
+          }
+          state.up = true;
+          update();
+          break
+        }
+        case 39: {
+          if(state.right){
+            break;
+          }
+          state.right = true;
+          update();
+          break
+        }
+        case 40: {
+          if(state.down){
+            break;
+          }
+          state.down = true;
+          update();
+          break
+        }
+        default: {
+          console.log(event.which)
+        }
+      }
+    });
+    $(document).on("keyup", function (event) {
+      switch(event.which){
+        case 37: {
+          if(!state.left){
+            break;
+          }
+          state.left = false;
+          update();
+          break
+        }
+        case 38: {
+          if(!state.up){
+            break;
+          }
+          state.up = false;
+          update();
+          break
+        }
+        case 39: {
+          if(!state.right){
+            break;
+          }
+          state.right = false;
+          update();
+          break
+        }
+        case 40: {
+          if(!state.down){
+            break;
+          }
+          state.down = false;
+          update();
+          break
+        }
+        default: {
+          console.log(event.which)
+        }
+      }
+    });
+         
+    </script>
+  </head>
+
+</html>
